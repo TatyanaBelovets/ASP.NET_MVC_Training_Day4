@@ -27,7 +27,7 @@ namespace Task1.Tests
                 arrResult[3] = new[] { 11, 22 };
                 arrResult[4] = new[] { 11, 22, 54, 66 };
             }
-            SortingForJaggedArrays.Sort(arr, new SortingByMaxAbsOfElements());
+            SortingForJaggedArrays.Sort(arr, new SortingByMaxAbsOfElementsByAscending());
             for (int i = 0; i < arr.Length; i++)
             {
                 for (int j = 0; j < arr[i].Length; j++)
@@ -56,7 +56,7 @@ namespace Task1.Tests
                 arrResult[1] = new[] { 11, 22 };
                 arrResult[0] = new[] { 11, 22, 54, -66 };
             }
-            SortingForJaggedArrays.Sort(arr, new SortingByMaxAbsOfElements(), Order.Descending);
+            SortingForJaggedArrays.Sort(arr, new SortingByMaxAbsOfElementsByDescending());
             for (int i = 0; i < arr.Length; i++)
             {
                 for (int j = 0; j < arr[i].Length; j++)
@@ -85,7 +85,7 @@ namespace Task1.Tests
                 arrResult[3] = new[] { 11, 22 };
                 arrResult[4] = new[] { 11, 22, 54, 66 };
             }
-            SortingForJaggedArrays.Sort(arr, new SortingBySumOfElements());
+            SortingForJaggedArrays.Sort(arr, new SortingBySumOfElementsByAscending());
             for (int i = 0; i < arr.Length; i++)
             {
                 for (int j = 0; j < arr[i].Length; j++)
@@ -114,7 +114,7 @@ namespace Task1.Tests
                 arrResult[1] = new[] { 11, 22 };
                 arrResult[0] = new[] { 11, 22, 54, 66 };
             }
-            SortingForJaggedArrays.Sort(arr, new SortingBySumOfElements(), Order.Descending);
+            SortingForJaggedArrays.Sort(arr, new SortingBySumOfElementsByDescending());
             for (int i = 0; i < arr.Length; i++)
             {
                 for (int j = 0; j < arr[i].Length; j++)

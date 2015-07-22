@@ -6,51 +6,120 @@ using System.Threading.Tasks;
 
 namespace Task1.Library
 {
-    public interface IJaggedArrayComparable
+    public interface IComparer
     {
-        bool Compare(int[] left, int[] right, Order order);
+        int Compare(int[] lhs, int[] rhs);
     }
 
-    public enum Order
-    {
-        Ascending = 1,
-        Descending = -1
-    }
-    public class SortingBySumOfElements : IJaggedArrayComparable
+    public class SortingBySumOfElementsByAscending : IComparer
     {
         /// <summary>
-        /// Sort matrix by sum of elements in rows.
+        /// Sort matrix by sum of elements in rows by ascending.
         /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <param name="order">Parameter for direction of sorting; default: by ascending </param>
-        public bool Compare(int[] left, int[] right, Order order = Order.Ascending)
+        /// <param name="lhs">Left operand</param>
+        /// <param name="rhs">Right operand</param>
+        /// <returns>0 if the objects are considered equal; -1 if lhs greater than rhs; 1 otherwise 
+        /// If both lhs and rhs are null, the method returns 0.</returns>
+        public int Compare(int[] lhs, int[] rhs)
         {
-            return order == Order.Descending ? left.Sum() > right.Sum() : left.Sum() < right.Sum();
+            if (lhs == null && rhs == null) return 0;
+            if (lhs == null || rhs == null) return lhs == null ? -1 : 1;
+            var lhsSum = 0;
+            var rhsSum = 0;
+            foreach (var element in lhs)
+            {
+                lhsSum += element; 
+            }
+            foreach (var element in rhs)
+            {
+                rhsSum += element; 
+            }
+            if (lhsSum == rhsSum) return 0;
+            return lhsSum < rhsSum ? 1 : -1;
         }
     }
 
-    public class SortingByMaxAbsOfElements : IJaggedArrayComparable
+    public class SortingBySumOfElementsByDescending : IComparer
     {
         /// <summary>
-        /// Sort matrix by max abs of elements in rows.
+        /// Sort matrix by sum of elements in rows by descending.
         /// </summary>
-        /// <param name="left">Left operand</param>
-        /// <param name="right">Right operand</param>
-        /// <param name="order">Parameter for direction of sorting; default: by ascending</param>
-        public bool Compare(int[] left, int[] right, Order order = Order.Ascending)
+        /// <param name="lhs">Left operand</param>
+        /// <param name="rhs">Right operand</param>
+        /// <returns>0 if the objects are considered equal; 1 if lhs greater than rhs; -1 otherwise 
+        /// If both lhs and rhs are null, the method returns 0.</returns>
+        public int Compare(int[] lhs, int[] rhs)
         {
-            var leftMaxModule = 0; 
-            var rightMaxModule = 0;
-            for (int i = 0; i < left.Length; i++)
+            if (lhs == null && rhs == null) return 0;
+            if (lhs == null || rhs == null) return rhs == null ? -1 : 1;
+            var lhsSum = 0;
+            var rhsSum = 0;
+            foreach (var element in lhs)
             {
-                leftMaxModule = leftMaxModule < left[i] ? left[i] : leftMaxModule;
+                lhsSum += element;
             }
-            for (int i = 0; i < right.Length; i++)
+            foreach (var element in rhs)
             {
-                rightMaxModule = rightMaxModule < right[i] ? right[i] : rightMaxModule;
+                rhsSum += element;
             }
-            return order == Order.Descending ? leftMaxModule > rightMaxModule : leftMaxModule < rightMaxModule;
+            if (lhsSum == rhsSum) return 0;
+            return lhsSum > rhsSum ? 1 : -1;
+        }
+    }
+
+    public class SortingByMaxAbsOfElementsByAscending : IComparer
+    {
+        /// <summary>
+        /// Sort matrix by max abs of elements in rows by ascending.
+        /// </summary>
+        /// <param name="lhs">Left operand</param>
+        /// <param name="rhs">Right operand</param>
+        /// <returns>0 if the objects are considered equal; -1 if lhs greater than rhs; 1 otherwise 
+        /// If both lhs and rhs are null, the method returns 0.</returns>
+        public int Compare(int[] lhs, int[] rhs)
+        {
+            if (lhs == null && rhs == null) return 0;
+            if (lhs == null || rhs == null) return lhs == null ? -1 : 1;
+            var lhsMaxModule = 0; 
+            var rhsMaxModule = 0;
+            for (int i = 0; i < lhs.Length; i++)
+            {
+                lhsMaxModule = lhsMaxModule < lhs[i] ? lhs[i] : lhsMaxModule;
+            }
+            for (int i = 0; i < rhs.Length; i++)
+            {
+                rhsMaxModule = rhsMaxModule < rhs[i] ? rhs[i] : rhsMaxModule;
+            }
+            if (lhsMaxModule == rhsMaxModule) return 0;
+            return lhsMaxModule < rhsMaxModule ? 1 : -1;
+        }
+    }
+
+    public class SortingByMaxAbsOfElementsByDescending : IComparer
+    {
+        /// <summary>
+        /// Sort matrix by max abs of elements in rows by ascending.
+        /// </summary>
+        /// <param name="lhs">Left operand</param>
+        /// <param name="rhs">Right operand</param>
+        /// <returns>0 if the objects are considered equal; 1 if lhs greater than rhs; -1 otherwise 
+        /// If both lhs and rhs are null, the method returns 0.</returns>
+        public int Compare(int[] lhs, int[] rhs)
+        {
+            if (lhs == null && rhs == null) return 0;
+            if (lhs == null || rhs == null) return rhs == null ? -1 : 1;
+            var lhsMaxModule = 0;
+            var rhsMaxModule = 0;
+            for (int i = 0; i < lhs.Length; i++)
+            {
+                lhsMaxModule = lhsMaxModule < lhs[i] ? lhs[i] : lhsMaxModule;
+            }
+            for (int i = 0; i < rhs.Length; i++)
+            {
+                rhsMaxModule = rhsMaxModule < rhs[i] ? rhs[i] : rhsMaxModule;
+            }
+            if (lhsMaxModule == rhsMaxModule) return 0;
+            return lhsMaxModule > rhsMaxModule ? 1 : -1;
         }
     }
     public class SortingForJaggedArrays
@@ -59,16 +128,16 @@ namespace Task1.Library
         /// Method for sort matrix.
         /// </summary>
         /// <param name="array">Matrix for sorting</param>
-        /// <param name="compare">Rule of sorting</param>
-        /// <param name="order">Parameter for direction of sorting; default: by ascending</param>
-        public static void Sort(int[][] array, IJaggedArrayComparable compare, Order order = Order.Ascending)
+        /// <param name="comparer">Rule of sorting</param>
+        /// <returns>Sorted jagged array</returns>
+        public static void Sort(int[][] array, IComparer comparer)
         {
             for (var i = 0; i < array.Length; i++)
             {
                 var nMaxLine = i;
                 for (var j = i + 1; j < array.Length; j++)
                 {
-                    nMaxLine = compare.Compare(array[nMaxLine], array[j], order) ? nMaxLine : j;
+                    nMaxLine = comparer.Compare(array[nMaxLine], array[j]) == 1 ? nMaxLine : j;
                 }
                 var temp = array[i];
                 array[i] = array[nMaxLine];
