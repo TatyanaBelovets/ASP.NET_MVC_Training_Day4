@@ -23,7 +23,7 @@ namespace Task1.Library
         public int Compare(int[] lhs, int[] rhs)
         {
             if (lhs == null && rhs == null) return 0;
-            if (lhs == null || rhs == null) return lhs == null ? -1 : 1;
+            if (lhs == null || rhs == null) return lhs == null ? 1 : -1;
             var lhsSum = 0;
             var rhsSum = 0;
             foreach (var element in lhs)
@@ -51,7 +51,7 @@ namespace Task1.Library
         public int Compare(int[] lhs, int[] rhs)
         {
             if (lhs == null && rhs == null) return 0;
-            if (lhs == null || rhs == null) return rhs == null ? -1 : 1;
+            if (lhs == null || rhs == null) return rhs == null ? 1 : -1;
             var lhsSum = 0;
             var rhsSum = 0;
             foreach (var element in lhs)
@@ -79,7 +79,7 @@ namespace Task1.Library
         public int Compare(int[] lhs, int[] rhs)
         {
             if (lhs == null && rhs == null) return 0;
-            if (lhs == null || rhs == null) return lhs == null ? -1 : 1;
+            if (lhs == null || rhs == null) return lhs == null ? 1 : -1;
             var lhsMaxModule = 0; 
             var rhsMaxModule = 0;
             for (int i = 0; i < lhs.Length; i++)
@@ -98,7 +98,7 @@ namespace Task1.Library
     public class SortingByMaxAbsOfElementsByDescending : IComparer
     {
         /// <summary>
-        /// Sort matrix by max abs of elements in rows by ascending.
+        /// Sort matrix by max abs of elements in rows by descending.
         /// </summary>
         /// <param name="lhs">Left operand</param>
         /// <param name="rhs">Right operand</param>
@@ -107,7 +107,7 @@ namespace Task1.Library
         public int Compare(int[] lhs, int[] rhs)
         {
             if (lhs == null && rhs == null) return 0;
-            if (lhs == null || rhs == null) return rhs == null ? -1 : 1;
+            if (lhs == null || rhs == null) return rhs == null ? 1 : -1;
             var lhsMaxModule = 0;
             var rhsMaxModule = 0;
             for (int i = 0; i < lhs.Length; i++)
